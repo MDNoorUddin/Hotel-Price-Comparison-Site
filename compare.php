@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Hotel Details</title>
     <style>
-
     input[type=text], select {
-    width: 20%;
-    padding: 20px 20px;
+    width: 100%;
+    padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -15,11 +14,10 @@
 }
 
 input[type=submit] {
-
-    width: 10%;
+    width: 100%;
     background-color: #4CAF50;
     color: white;
-    padding: 20px 20px;
+    padding: 14px 20px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
@@ -27,8 +25,8 @@ input[type=submit] {
 }
 
 input[type=date], select {
-    width: 20%;
-    padding: 20px 20px;
+    width: 100%;
+    padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -45,7 +43,7 @@ input[type=date], select {
     background: #eee;
     overflow-x: hidden;
     padding: 8px 0;
-
+    background-image: url("30706553_187157408587877_6455268977542168576_n.jpg");
 }
 media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
@@ -64,7 +62,7 @@ h1{
     font-size: 40px;
 }
 body{
-    
+    background-image: url("pexels-photo-490466.jpeg");
     background-size: 100%;
   }
   div.t
@@ -78,43 +76,25 @@ body{
     height: 200px;
   }
 </style>
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body> 
+<body>
+      <div class="name" align="center"><h1 style="color: white font">cheapbook</h1></div>
+      <div class="sidenav">
+  <input type="text" placeholder="Search City..." id ="1" required name="1" width="450" height="120" >
+   <br>
+   <input id="date" type="date" name="check-in">
+   <br>
 
-      <div  style="width: 100%; position:absolute; top: 100px; left:200px; ">
-
-   <form action="myProject.php" method="post" >
-
-
-   <p align="center" style="color:gray font-size:15px;">Search Your Destination</p>
-
-   <input type="text" placeholder="Search City..." id ="1" required name="1" style="font-size: 20px;">
-
-   <input id="date" type="date" name="check-in" value="<?php echo date('Y-m-d'); ?>" style="font-size: 20px;">
-
-
-   <input id="date2" type="date" name="check-out" value="<?php echo date('Y-m-d'); ?>" style="font-size: 20px;">
-
-   <input type="submit" value = "search" name="submit" style="font-size: 20px;">
-
-   </form>
-
-</div>
-      
-      <div>
- 
-      <div align="center"><p style="color: gray; font-size: 40px;">cheapbook</p></div>
+   <input id="date2" type="date" name="check-out">
+   <br>
+   <input type="submit" value = "search" name="submit">
+  </div>
      
 
       <?php
     if($_GET){
 
-        $top=250;
+      $top=180;
 
         $city = $_GET ['city']; 
         
@@ -147,7 +127,7 @@ body{
     }
    
 
-    //$
+
 
     $url_touriffy = file_get_contents("http://www.touriffy.com/index.php/hotel/hotelsearch/$city/all/$check_in/$check_out/score_desc/USD/pricepernight-/stars-/facility-/10");
 
@@ -155,17 +135,11 @@ body{
 
     $touriffy_hotel_name_with_deal_link = array(20);
 
-    $hotelBD_hotel_name_with_price = array(20);
-
-    $hotelBD_hotel_name_with_deal_link = array(20);
-
     $touriffy_counter=0;
 
     // from line 39 I am going to extract touriffy.com
 
     $first_partition = explode('<div class="wide_gray_box">', $url_touriffy);
-
-    if($first_partition=="")echo "empty";
 
     // first partition
 
@@ -219,7 +193,6 @@ body{
     $amarroom_hotel_name_with_deal_link = array(20);  
 
     $amarroom_counter=0;
-    $url_amarRoom="";
  
 
     if( $city == "Coxs-Bazar" )
@@ -242,7 +215,7 @@ body{
        $url_amarRoom = "https://amarroom.com/hotels-in-chittagong-12/?&checkin=";
     }
 
-    else if( $city == "Saint-Martin" )
+    else if( $city == "Saint Martin" )
     {
         $url_amarRoom = "https://amarroom.com/hotels-in-saint-martin-48/?&checkin=";
     }
@@ -255,18 +228,16 @@ body{
         $url_amarRoom = "https://amarroom.com//hotels-in-dhaka-bangladesh-1/?&checkin=";
     }
     //now making the final url
-     if($url_amarRoom!=""){
-           
-           $url_amarRoom =  $url_amarRoom.$dup_check_in;  // adding check-in date
+     
+    $url_amarRoom =  $url_amarRoom.$dup_check_in;  // adding check-in date
 
     $url_amarRoom = $url_amarRoom."&check_out".$dup_check_out;
-     }
 
     // making url for amarroom.com is done
 
     //now picking up the html
     //echo $url_amarRoom;
-    if($url_amarRoom!="")
+
     $url_amarRoom = file_get_contents( $url_amarRoom );
 
     // now I am going to extract amarroom.com
@@ -359,19 +330,16 @@ body{
             {
                 
                 
-             echo "<div class='t' style='position: absolute; top: " .$top."px; background-color:gray;'>";
+             echo "<div class='t' style='position: absolute; top: " .$top."px; '>";
               ?>
               <?php
             $top+=300;
             
-                echo "'<p align='center' style=' 
-                left 760px;font-size: 25px; color:white'>$key</p> <br><p align='right' style='color:green; font-size: 20px;'>touriffy.com= $touriffy_hotel_name_with_price[$key]/- <br><strike style='color:red'>  amarroom.com = $amarroom_hotel_name_with_price[$key]/-</strike></h3>";
+                echo "'<h3 align='center'>$key <br>best price = $touriffy_hotel_name_with_price[$key] <br>worst price = $amarroom_hotel_name_with_price[$key]</h3>";
                 echo "<br>";
 
-
-                echo '<p align="right" style="left 800px;font-size: 15px;""><a href=" ' . $touriffy_hotel_name_with_deal_link[$key] . ' "><button type="button" class="btn btn-warning">View Deal</button></a></p>';
+                echo '<h3 align="center"><a href=" ' . $touriffy_hotel_name_with_deal_link[$key] . ' ">view best deal at touriffy.com</a></h3>';
                 echo "<br>";
-
                 echo "<br>";echo "<br>";
             }
             ?>
@@ -380,16 +348,16 @@ body{
          }
          else
          {
-          echo "<div class='t' style='position: absolute; top: " .$top."px; background-color:gray;''>";
+          echo "<div class='t' style='position: absolute; top: " .$top."px; '>";
             ?>
         
             <?php
             $top+=300;
-                echo "<p align='center' style='font-size: 25px;color:white'>$key </p><br><p align ='right' style='color: green;font-size: 20px;'>touriffy.com =$touriffy_hotel_name_with_price[$key]/-</p>";
+                echo "<h3 align='center'>$key <br>best price = $touriffy_hotel_name_with_price[$key]</h3>";
 
-                echo "<br>";echo "<br>";
+                echo "<br>";
 
-                echo '<p align="right"><a href=" '  . $touriffy_hotel_name_with_deal_link[$key] .  ' "><button type="button" class="btn btn-warning">View Deal</button></a></p>';
+                echo '<h3 align="center"><a href=" ' . $touriffy_hotel_name_with_deal_link[$key] . ' ">view best deal at touriffy.com</a></h3>';
 
                 echo "<br>";
                 echo "<br>";
@@ -404,15 +372,15 @@ body{
      {
         if( $amarroom_room_visit[$key] == 0 &$key!="0" )
         {
-          echo "<div class='t' style='position: absolute; top: " .$top."px; background-color:gray;''>";
+          echo "<div class='t' style='position: absolute; top: " .$top."px; '>";
             ?>
             <?php
             $top+=300;
-               echo "<p align='center' style='font-size: 25px; color:white'>$key</p> <br><p align ='right' style='color: green;font-size: 20px;'>amarroom.com $amarroom_hotel_name_with_price[$key]/-</p>";
+               echo "<h3 align='center'>$key <br>best price = $amarroom_hotel_name_with_price[$key]</h3>";
 
-                echo "<br>";echo "<br>";
+                echo "<br>";
 
-                echo '<p align="right"><a href=" ' . $amarroom_hotel_name_with_deal_link[$key] . ' "><button type="button" class="btn btn-warning">View Deal</button></a></p>';
+                echo '<h3 align="center"><a href=" ' . $amarroom_hotel_name_with_deal_link[$key] . ' ">view best deal at amarroom.com</a></h3>';
 
                 echo "<br>";
                 echo "<br>";
@@ -423,6 +391,5 @@ body{
         }
      }
 ?>
-</div>
 </body>
 </html>
